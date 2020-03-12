@@ -1,0 +1,36 @@
+## Microsoft Sql Server###
+
+#Test Connection
+sqoop list-tables --connect "jdbc:sqlserver://<host>:port;databaseName=db_name" --driver com.microsoft.sqlserver.jdbc.SQLServerDriver --username username -P
+
+#Import directly in HIVE tables
+sqoop import \
+--connect "jdbc:sqlserver://host:port;databaseName=$sqlDB" \
+--driver com.microsoft.sqlserver.jdbc.SQLServerDriver \
+--username $username --password $password \
+--table $DW_table \
+--split-by $col \
+--hive-import \
+--hive-table $hiveTable \
+--fields-terminated-by "," \
+--target-dir $targerDir
+
+sqoop import \
+--connect "jdbc:sqlserver://host:port;databaseName=AIG_JUMIA_KE_DW" \
+--driver com.microsoft.sqlserver.jdbc.SQLServerDriver \
+--username bigdata.ecm.extract -P \
+--query 'SELECT top 100 cod_supplier_bob,eur_mv_gross FROM cmrk.V_001_CENTRAL_MARKETING_ITEMS WHERE $CONDITIONS' \
+--split-by eur_mv_gross \
+--hive-import \
+--hive-table test2_sqoop \
+--fields-terminated-by "," \
+--target-dir $targerDir
+
+# Import to HDFS directory
+sqoop import \
+--connect "jdbc:sqlserver://host:port;databaseName=$sqlDB" \
+--driver com.microsoft.sqlserver.jdbc.SQLServerDriver \
+--username $username --password $password \
+--table $DW_table \
+--split-by $col \
+--target-dir $targerDir
