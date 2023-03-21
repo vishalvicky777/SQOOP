@@ -16,9 +16,9 @@ sqoop import \
 --target-dir $targerDir
 
 sqoop import \
---connect "jdbc:sqlserver://host:port;databaseName=AIG_JUMIA_KE_DW" \
+--connect "jdbc:sqlserver://host:port;databaseName=$sqlDB" \
 --driver com.microsoft.sqlserver.jdbc.SQLServerDriver \
---username bigdata.ecm.extract -P \
+--username $username -P \
 --query 'SELECT top 100 cod_supplier_bob,eur_mv_gross FROM cmrk.V_001_CENTRAL_MARKETING_ITEMS WHERE $CONDITIONS' \
 --split-by eur_mv_gross \
 --hive-import \
