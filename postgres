@@ -1,1 +1,2 @@
+sqoop list-tables --connect jdbc:postgresql://horton-mgmt0.jumia.local:5432/ambaridb --username postgres
 
