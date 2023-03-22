@@ -34,3 +34,10 @@ sqoop import \
 --table $DW_table \
 --split-by $col \
 --target-dir $targerDir
+
+
+sqoop import -Dhadoop.security.credential.provider.path=jceks://hdfs@<clustername>/<path>/credentials.jceks \
+--connect "jdbc:sqlserver://<server>:<port>;databaseName=<db>" --driver com.microsoft.sqlserver.jdbc.SQLServerDriver --username <username> \
+--query "<query> AND \$CONDITIONS" \
+--target-dir <hdfs_path> --split-by <colname> --delete-target-dir --fields-terminated-by "," \
+--password-alias <alias>
