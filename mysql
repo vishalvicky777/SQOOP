@@ -1,1 +1,2 @@
+#-Dmapreduce.job.queuename=qv_analytics -D mapred.job.name=IMPORT_
 
